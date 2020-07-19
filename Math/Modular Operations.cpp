@@ -14,6 +14,9 @@ ll add ( ll a, ll b ){
     if( ret >= MOD ) ret -= MOD;
     return ret;
 }
+ll sub ( ll a, ll b ){
+    return add( a , MOD - b );
+}
 ll mult ( ll a, ll b ){
     ll ret = a*b;
     if( ret >= MOD or ret < 0 ) ret %= MOD;
