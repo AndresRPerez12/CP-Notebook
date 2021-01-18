@@ -13,7 +13,7 @@ while( ( hi - lo ) >= 3 ){
     }
 }
 ll h, best = LLONG_MAX;
-for( int i = lo ; i <= hi ; i ++ ){
+for( ll i = lo ; i <= hi ; i ++ ){
     ll sal = solve( i );
     if( sal < best ){
         best = sal;

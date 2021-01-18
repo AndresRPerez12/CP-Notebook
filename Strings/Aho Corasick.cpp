@@ -5,9 +5,9 @@ ll last[N];
 ll tam[N];
 
 int trie [NODES][28];
-int parent [NODES]; ///
-int suff[NODES]; ///
-int exitL[NODES]; ///
+int parent [NODES]; /// fill -1
+int suff[NODES]; /// fill -1
+int exitL[NODES]; /// fill -1
 char pch [NODES];
 int cont = 0;
 vector <int> fin [NODES];
@@ -22,13 +22,11 @@ int suffLink( int v ){
 }
 
 int go( int v , char c ){
-//    cout << "go " << v << " " << c << " -> " ;
     int let;
     let = c - 'a';
     if( trie[v][let] == 0 ){
         if( v != 0 ) trie[v][let] = go( suffLink( v ) , c );
     }
-//    cout << trie[v][let] << endl ;
     return trie[v][let];
 }
 
@@ -47,7 +45,6 @@ void addString( string s , int id ){
         let = s[i] - 'a';
         if( trie[curr][let] == 0 ){
             cont ++;
-//            cout << "create node " << curr << " " << s[i] << " -> " << cont << endl ;
             trie[curr][let] = cont;
             parent[cont] = curr;
             pch[cont] = s[i];
@@ -55,19 +52,15 @@ void addString( string s , int id ){
         curr = trie[curr][let];
     }
     fin[curr].push_back(id);
-//    cout << "IN " << curr << " ends " << id << endl ;
 }
 
 void process( string s ){
     int curr = 0;
     for( int i = 0 ; i < s.size() ; i ++ ){
         curr = go( curr , s[i] );
-//        cout << i << " -> " << curr << endl ;
         int aux = exitLink( curr );
         while( aux != 0 ){
-//            cout << "   aux = " << aux << endl ;
             for( int k : fin[aux] ){
-//                cout << "      eva " << k << " : " << last[k] << endl ;
                 if( last[k] == -1 or last[k] + tam[k] <= i ){
                     ans[k] ++;
                     last[k] = i;
